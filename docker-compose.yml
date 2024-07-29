@@ -1,0 +1,31 @@
+services:
+  wordpress1:
+    image: wordpress:latest
+    container_name: nodowp
+    ports:
+      - "8001:80"
+    environment:
+      WORDPRESS_DB_HOST: base_master3
+      WORDPRESS_DB_USER: juan
+      WORDPRESS_DB_PASSWORD: juan321
+      WORDPRESS_DB_NAME: wordpress
+      WORD_TABLE_PFIX: wp1_
+
+  base_master3:
+    image: mysql:5.7
+    container_name: base_master3
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: juan
+      MYSQL_PASSWORD: juan321
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: php3
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOSTS: "base_master3"
+      PMA_ARBITRARY: 1
+      
